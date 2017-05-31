@@ -6,6 +6,7 @@ import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import FlatButton from 'material-ui/FlatButton';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
 
@@ -18,6 +19,7 @@ const Title = ({todoCount}) => {
     </div>
   );
 }
+
 
 const TodoForm = ({addTodo}) => {
   // Input Tracker
@@ -50,6 +52,16 @@ const TodoList = ({todos, remove}) => {
   return (<div className="list-group" style={{marginTop:'30px'}}>{todoNode}</div>);
 }
 
+
+const ourList = () => {
+ <ul>
+  <li>hey</li>
+  <li> hey </li>
+
+ </ul>
+};
+
+
 function handleTouchTap() {
   alert('onTouchTap triggered on the title component');
 }
@@ -60,7 +72,7 @@ const styles = {
   },
 };
 
-const AppBarExampleIconButton = () => (
+  const AppBarExampleIconButton = () => (
   <AppBar
     title={<span style={styles.title}>Title</span>}
     onTitleTouchTap={handleTouchTap}
@@ -69,7 +81,11 @@ const AppBarExampleIconButton = () => (
   />
 );
 
-// Contaner Component
+
+
+
+
+// Container Component
 // Todo Id
 window.id = 0;
 class App extends Component {
@@ -119,15 +135,25 @@ class App extends Component {
 
 
   render() {
+  
+
     return (
-      <div className="App">
-        <div className="App-header">
-          <h2>Welcome to SMART!</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
       
+      <div className="App">
+        
+        <MuiThemeProvider App-Bar>
+        <div className="AppBar">
+          <AppBar />
+          <h1>Welcome to SMART!</h1>
+        </div>
+        </MuiThemeProvider>
+        
+        <p className="App-intro">
+          Welcome to your page to keep track of your goals and healthy habits! 
+        </p>
+       
+       
       <div>
         <Title todoCount={this.state.data.length}/>
         <TodoForm addTodo={this.addTodo.bind(this)}/>
@@ -136,7 +162,21 @@ class App extends Component {
           remove={this.handleRemove.bind(this)}
         />
       </div>
+      
       </div>
+      
+      <div className="List">
+          <h3> Recommendations from SMART</h3>
+          <li> Eat! </li>
+          <li> Go for a walk~ </li>
+          <li> Meditate </li>
+          <li> Deep breathing exercises </li>
+          <li> Go for a walk~ </li>
+          <li> Drink Water+ </li>
+          <li> Social activity </li>
+        </div>
+       
+        </div>
     );
   }
 }

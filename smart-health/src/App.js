@@ -154,42 +154,21 @@ class App extends Component {
         </p>
         <Router>
         <p className="Nav-links">
-        <a> <Link to="/home">Home</Link> </a> 
-        <a> | </a> <a> <Link to="/about">About</Link> </a> 
+       
+       <a> <Link to="/home">Home</Link> </a> 
+        <a> | </a>< a> <Link to="/about">About</Link> </a> 
         <a> | </a> <a> <Link to="/rate-your-day">How was your day?</Link> </a>
         
-        <Route exact path="/home" component={Home}/>
-        <Route exact path="/about" component={About}/> 
-        <Route exact path="/rate-your-day" component={Day}/>
+
+        <Route exact path="/" component={Home}/> 
+        <Route exact path="/home" component={Home}/> 
+        <Route path="/about" component={About}/> 
+        <Route path="/rate-your-day" component={Day}/>
         
         </p>
         </Router>
        </div>
 
-
-       
-      <div className="ToDo">
-        <Title todoCount={this.state.data.length}/>
-        <TodoForm addTodo={this.addTodo.bind(this)}/>
-        <TodoList
-          todos={this.state.data}
-          remove={this.handleRemove.bind(this)}
-        />
-      </div>
-      
-      
-      <div className="List">
-          <h3> Recommendations</h3>
-          <ul>
-          <li> Eat! </li>
-          <li> Go for a walk~ </li>
-          <li> Meditate </li>
-          <li> Deep breathing exercises </li>
-          <li> Go for a walk~ </li>
-          <li> Drink Water+ </li>
-          <li> Social activity </li>
-          </ul>
-        </div>
        
         </div>
         </div>

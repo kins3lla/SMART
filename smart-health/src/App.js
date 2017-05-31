@@ -53,14 +53,6 @@ const TodoList = ({todos, remove}) => {
 }
 
 
-const ourList = () => {
- <ul>
-  <li>hey</li>
-  <li> hey </li>
-
- </ul>
-};
-
 
 function handleTouchTap() {
   alert('onTouchTap triggered on the title component');
@@ -154,7 +146,7 @@ class App extends Component {
         </p>
        
        
-      <div>
+      <div className="ToDo">
         <Title todoCount={this.state.data.length}/>
         <TodoForm addTodo={this.addTodo.bind(this)}/>
         <TodoList
@@ -166,7 +158,8 @@ class App extends Component {
       </div>
       
       <div className="List">
-          <h3> Recommendations from SMART</h3>
+          <h3> Recommendations</h3>
+          <ul>
           <li> Eat! </li>
           <li> Go for a walk~ </li>
           <li> Meditate </li>
@@ -174,6 +167,7 @@ class App extends Component {
           <li> Go for a walk~ </li>
           <li> Drink Water+ </li>
           <li> Social activity </li>
+          </ul>
         </div>
        
         </div>

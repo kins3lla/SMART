@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
-import NavigationClose from 'material-ui/svg-icons/navigation/close';
-import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import About from './About.js'
+import Day from './DayRate.js'
+import Home from './Home.js'
 
 const Title = ({todoCount}) => {
   return (
@@ -52,10 +51,13 @@ const TodoList = ({todos, remove}) => {
   return (<div className="list-group" style={{marginTop:'30px'}}>{todoNode}</div>);
 }
 
-
+// THIS IS THE NAV BAR STUFF 
 
 function handleTouchTap() {
-  alert('onTouchTap triggered on the title component');
+  //we want to send/route to home page here
+}
+function handleNavTouch(){
+  //trigger the drop down menu
 }
 
 const styles = {
@@ -68,19 +70,21 @@ const styles = {
   <AppBar
     title={<span style={styles.title}>Title</span>}
     onTitleTouchTap={handleTouchTap}
-    iconElementLeft={<IconButton><NavigationClose /></IconButton>}
-    iconElementRight={<FlatButton label="Save" />}
+    iconElementLeft={<IconButton> </IconButton>}
   />
 );
 
 
-
+//END NAV BAR STUFF
 
 
 // Container Component
 // Todo Id
 window.id = 0;
 class App extends Component {
+
+
+
    constructor(props){
     // Pass props to parent class
     super(props);
@@ -124,11 +128,11 @@ class App extends Component {
       })
   }
 
-
+//App-Bar
+//<MuiThemeProvider>
 
   render() {
   
-
     return (
       <div>
       
@@ -136,15 +140,33 @@ class App extends Component {
         
         <MuiThemeProvider App-Bar>
         <div className="AppBar">
-          <AppBar />
-          <h1>Welcome to SMART!</h1>
-        </div>
-        </MuiThemeProvider>
+          <AppBar
+          title="Welcome to SMART!"
+          />
+
         
+       </div>
+       </MuiThemeProvider>
+        
+       <div> 
         <p className="App-intro">
           Welcome to your page to keep track of your goals and healthy habits! 
         </p>
-       
+        <Router>
+        <p className="Nav-links">
+        <a> <Link to="/home">Home</Link> </a> 
+        <a> | </a> <a> <Link to="/about">About</Link> </a> 
+        <a> | </a> <a> <Link to="/rate-your-day">How was your day?</Link> </a>
+        
+        <Route exact path="/home" component={Home}/>
+        <Route exact path="/about" component={About}/> 
+        <Route exact path="/rate-your-day" component={Day}/>
+        
+        </p>
+        </Router>
+       </div>
+
+
        
       <div className="ToDo">
         <Title todoCount={this.state.data.length}/>
@@ -155,7 +177,6 @@ class App extends Component {
         />
       </div>
       
-      </div>
       
       <div className="List">
           <h3> Recommendations</h3>
@@ -171,8 +192,10 @@ class App extends Component {
         </div>
        
         </div>
+        </div>
     );
   }
 }
+
 
 export default App;

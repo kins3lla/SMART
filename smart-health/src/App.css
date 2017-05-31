@@ -15,22 +15,26 @@
 }
 
 .List {
-  position: absolute;
+  position: relative;
   bottom: 150px;
   display: inline-block;
   text-align: left;
   left: 50px;
   list-style-type: none;
   margin: auto;
+  font-family: "Times New Roman", Times, serif;
+ 
  
 }
 
 .ul {
   list-style: none;
+  
 }
 
 li {
   list-style-type: none;
+  
 }
 
 

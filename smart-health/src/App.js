@@ -4,32 +4,33 @@ import axios from 'axios';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import About from './About.js'
 import Day from './DayRate.js'
 import Home from './Home.js'
+import * as firebase from 'firebase'
 
-const Title = ({todoCount}) => {
+const Title = ({ todoCount }) => {
   return (
     <div>
-       <div>
-          <h1>to-do ({todoCount})</h1>
-       </div>
+      <div>
+        <h1>to-do ({todoCount})</h1>
+      </div>
     </div>
   );
 }
 
 
-const TodoForm = ({addTodo}) => {
+const TodoForm = ({ addTodo }) => {
   // Input Tracker
   let input;
   // Return JSX
   return (
     <form onSubmit={(e) => {
-        e.preventDefault();
-        addTodo(input.value);
-        input.value = '';
-      }}>
+      e.preventDefault();
+      addTodo(input.value);
+      input.value = '';
+    }}>
       <input className="form-control col-md-12" ref={node => {
         input = node;
       }} />
@@ -38,17 +39,17 @@ const TodoForm = ({addTodo}) => {
   );
 };
 
-const Todo = ({todo, remove}) => {
+const Todo = ({ todo, remove }) => {
   // Each Todo
-  return (<a href="#" className="list-group-item" onClick={() => {remove(todo.id)}}>{todo.text}</a>);
+  return (<a href="#" className="list-group-item" onClick={() => { remove(todo.id) }}>{todo.text}</a>);
 }
 
-const TodoList = ({todos, remove}) => {
+const TodoList = ({ todos, remove }) => {
   // Map through the todos
   const todoNode = todos.map((todo) => {
-    return (<Todo todo={todo} key={todo.id} remove={remove}/>)
+    return (<Todo todo={todo} key={todo.id} remove={remove} />)
   });
-  return (<div className="list-group" style={{marginTop:'30px'}}>{todoNode}</div>);
+  return (<div className="list-group" style={{ marginTop: '30px' }}>{todoNode}</div>);
 }
 
 // THIS IS THE NAV BAR STUFF 
@@ -56,7 +57,7 @@ const TodoList = ({todos, remove}) => {
 function handleTouchTap() {
   //we want to send/route to home page here
 }
-function handleNavTouch(){
+function handleNavTouch() {
   //trigger the drop down menu
 }
 
@@ -66,7 +67,7 @@ const styles = {
   },
 };
 
-  const AppBarExampleIconButton = () => (
+const AppBarExampleIconButton = () => (
   <AppBar
     title={<span style={styles.title}>Title</span>}
     onTitleTouchTap={handleTouchTap}
@@ -79,99 +80,102 @@ const styles = {
 
 
 // Container Component
-// Todo Id
-window.id = 0;
 class App extends Component {
 
 
 
-   constructor(props){
+  constructor(props) {
     // Pass props to parent class
     super(props);
     // Set initial state
     this.state = {
-      data: []
+      data: [],
+      showStars: false
+
     }
     this.apiUrl = 'https://57b1924b46b57d1100a3c3f8.mockapi.io/api/todos'
   }
-  
-    // Lifecycle method
-  componentDidMount(){
+
+
+  // Lifecycle method
+  componentDidMount() {
+    Notification.requestPermission();
     // Make HTTP reques with Axios
     axios.get(this.apiUrl)
       .then((res) => {
         // Set state with result
-        this.setState({data:res.data});
+        this.setState({ data: res.data });
       });
   }
+  
   // Add todo handler
-  addTodo(val){
+  addTodo(val) {
     // Assemble data
-    const todo = {text: val}
+    const todo = { text: val }
     // Update data
     axios.post(this.apiUrl, todo)
-       .then((res) => {
-          this.state.data.push(res.data);
-          this.setState({data: this.state.data});
-       });
+      .then((res) => {
+        this.state.data.push(res.data);
+        this.setState({ data: this.state.data });
+      });
   }
   // Handle remove
-  handleRemove(id){
+  handleRemove(id) {
     // Filter all todos except the one to be removed
     const remainder = this.state.data.filter((todo) => {
-      if(todo.id !== id) return todo;
+      if (todo.id !== id) return todo;
     });
     // Update state with filter
-    axios.delete(this.apiUrl+'/'+id)
+    axios.delete(this.apiUrl + '/' + id)
       .then((res) => {
-        this.setState({data: remainder});
+        this.setState({ data: remainder });
       })
   }
 
-//App-Bar
-//<MuiThemeProvider>
+  //App-Bar
+  //<MuiThemeProvider>
 
   render() {
-  
+
     return (
       <div>
-      
-      <div className="App">
-        
-        <MuiThemeProvider App-Bar>
-        <div className="AppBar">
-          <AppBar
-          title="Welcome to SMART!"
-          />
 
-        
-       </div>
-       </MuiThemeProvider>
-        
-       <div> 
-        <p className="App-intro">
-          Welcome to your page to keep track of your goals and healthy habits! 
+        <div className="App">
+
+          <MuiThemeProvider App-Bar>
+            <div className="AppBar">
+              <AppBar
+                title="Welcome to SMART!"
+              />
+
+
+            </div>
+          </MuiThemeProvider>
+
+          <div>
+            <p className="App-intro">
+              Welcome to your page to keep track of your goals and healthy habits!
         </p>
-        <Router>
-        <p className="Nav-links">
-       
-       <a> <Link to="/home">Home</Link> </a> 
-        <a> | </a>< a> <Link to="/about">About</Link> </a> 
-        <a> | </a> <a> <Link to="/rate-your-day">How was your day?</Link> </a>
-        
+            <Router>
+              <p className="Nav-links">
 
-        <Route exact path="/" component={Home}/> 
-        <Route exact path="/home" component={Home}/> 
-        <Route path="/about" component={About}/> 
-        <Route path="/rate-your-day" component={Day}/>
-        
-        </p>
-        </Router>
-       </div>
+                <a> <Link to="/home">Home</Link> </a>
+                <a> | </a>< a> <Link to="/about">About</Link> </a>
+                <a> | </a> <a> <Link to="/rate-your-day">How was your day?</Link> </a>
 
-       
+
+                <Route exact path="/" component={Home} />
+                <Route exact path="/home" component={Home} />
+                <Route exact path="/about" component={About} />
+                <Route exact path="/rate-your-day" component={Day} />
+
+              </p>
+            </Router>
+          </div>
+
+
         </div>
-        </div>
+      </div>
     );
   }
 }

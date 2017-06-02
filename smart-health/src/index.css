@@ -2,10 +2,10 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-color: lightcyan;
+  background-image: url("https://pixabay.com/en/water-sea-caribbean-background-1330252/");
+  background-size: 100%;
+
 }
-
-
 /* Remove margins and padding from the list */
 ul {
     margin: 0;
@@ -17,7 +17,7 @@ ul li {
     cursor: pointer;
     position: relative;
     padding: 12px 8px 12px 40px;
-    background: #D8BFD8;
+    background: honeydew;
     font-size: 18px;
     transition: 0.2s;
 
@@ -30,7 +30,7 @@ ul li {
 
 /* Set all odd list items to a different color (zebra-stripes) */
 ul li:nth-child(odd) {
-    background: pink ;
+    background: lavenderblush ;
 }
 
 /* Darker background-color on hover */
@@ -68,14 +68,6 @@ ul li.checked::before {
 }
 
 
-
-/* Style the header */
-.header {
-    background-color: #f44336 ;
-    padding: 30px 40px;
-    color: white;
-    text-align: center;
-}
 
 /* Clear floats after the header */
 .header:after {

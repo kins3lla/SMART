@@ -7,7 +7,10 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import About from './About.js'
 import Day from './DayRate.js'
-import Home from './Home.js'
+
+
+
+var complete = false;
 
 const Title = ({todoCount}) => {
   return (
@@ -38,10 +41,15 @@ const TodoForm = ({addTodo}) => {
   );
 };
 
+
 const Todo = ({todo, remove}) => {
   // Each Todo
-  return (<a href="#" className="list-group-item" onClick={() => {remove(todo.id)}}>{todo.text}</a>);
+  return (<a href="#" className="list-group-item" onClick={() => {{remove(todo.id)}; congratulationAction()}}>{todo.text}</a>);
 }
+
+const congratulationAction = (complete) => { return ( console.log("it worked!!")
+
+    ); }
 
 const TodoList = ({todos, remove}) => {
   // Map through the todos
@@ -66,24 +74,12 @@ const styles = {
   },
 };
 
-  const AppBarExampleIconButton = () => (
-  <AppBar
-    title={<span style={styles.title}>Title</span>}
-    onTitleTouchTap={handleTouchTap}
-    iconElementLeft={<IconButton> </IconButton>}
-  />
-);
-
-
-//END NAV BAR STUFF
-
 
 // Container Component
 // Todo Id
-window.id = 0;
-class App extends Component {
-
-
+//window.id = 0;
+class Home extends Component {
+ 
 
    constructor(props){
     // Pass props to parent class
@@ -98,6 +94,7 @@ class App extends Component {
     // Lifecycle method
   componentDidMount(){
     // Make HTTP reques with Axios
+     Notification.requestPermission();
     axios.get(this.apiUrl)
       .then((res) => {
         // Set state with result
@@ -119,14 +116,21 @@ class App extends Component {
   handleRemove(id){
     // Filter all todos except the one to be removed
     const remainder = this.state.data.filter((todo) => {
-      if(todo.id !== id) return todo;
+      if(todo.id !== id){ return todo }
+      else{complete = true}
+      new Notification('RADICAL DUDE!!!');
     });
     // Update state with filter
     axios.delete(this.apiUrl+'/'+id)
       .then((res) => {
-        this.setState({data: remainder});
-      })
+        this.setState({data: remainder});})
+
+  
   }
+  handleCongratulationAction(complete){
+      console.log("it worked!");
+    }
+  
 
 //App-Bar
 //<MuiThemeProvider>
@@ -135,29 +139,12 @@ class App extends Component {
   
     return (
       <div>
-      
-      <div className="App">
-        
-        <MuiThemeProvider App-Bar>
-        <div className="AppBar">
-          <AppBar
-          title="Welcome to SMART!"
-          />
-
-        
-       </div>
-       </MuiThemeProvider>
         
        <div> 
-        <p className="App-intro">
-          Welcome to your page to keep track of your goals and healthy habits! 
-        </p>
+       
         <Router>
         <p className="Nav-links">
-       
-       <a> <Link to="/about">About</Link> </a> 
-        <a> | </a> <a> <Link to="/rate-your-day">How was your day?</Link> </a>
-        
+  
        
         <Route exact path="/about" component={About}/> 
         <Route exact path="/rate-your-day" component={Day}/>
@@ -174,14 +161,17 @@ class App extends Component {
         <TodoList
           todos={this.state.data}
           remove={this.handleRemove.bind(this)}
+          complete={this.handleRemove.complete}
+          
         />
+        
       </div>
       
       
       <div className="List">
           <h3> Recommendations</h3>
           <ul>
-          <li> Eat! </li>
+          <button class="Eat"> Eat </button>
           <li> Go for a walk~ </li>
           <li> Meditate </li>
           <li> Deep breathing exercises </li>
@@ -189,11 +179,14 @@ class App extends Component {
           <li> Drink Water+ </li>
           <li> Social activity </li>
           </ul>
+          
         </div>
       
        
         </div>
-        </div>
+        
     );
   }
 }
+
+export default Home;

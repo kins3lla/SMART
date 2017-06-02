@@ -6,6 +6,7 @@ import axios from 'axios';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import About from './About.js'
 import Home from './Home.js'
+import Confetti from 'react-confetti'
 
 class Day extends Component {
   static propTypes = {
@@ -129,7 +130,7 @@ class Day extends Component {
       return renderStarIcon(index, value, name);
     }
 
-    return <i style={{fontStyle: 'normal'}}>&#9733;</i>;
+    return <i style={{fontStyle: 'normal', }}>&#9733;</i>;
   }
 
   render() {
@@ -141,6 +142,7 @@ class Day extends Component {
     return (
       <div style={{display: 'inline-block', position: 'relative'}} className={classes}>
         {this.renderStars()}
+       <Confetti />
        </div>
     );
   }

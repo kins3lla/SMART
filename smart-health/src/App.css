@@ -7,6 +7,10 @@
   height: 80px;
 }
 
+.AppBar {
+  font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+}
+
 .App-header {
   background-color: #222;
   height: 150px;
@@ -16,9 +20,19 @@
 
 .App-intro {
   font-size: large;
+  color: black;
+  font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+
 }
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.Nav-links {
+  font-family: "Courier New", Courier, monospace;
+  color: black;
+
+}
+

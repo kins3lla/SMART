@@ -5,7 +5,7 @@ import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import About from './About.js'
+//import About from './About.js'
 import Day from './DayRate.js'
 import Home from './Home.js'
 import * as firebase from 'firebase'
@@ -71,7 +71,6 @@ const AppBarExampleIconButton = () => (
   <AppBar
     title={<span style={styles.title}>Title</span>}
     onTitleTouchTap={handleTouchTap}
-    iconElementLeft={<IconButton> </IconButton>}
   />
 );
 
@@ -157,16 +156,17 @@ class App extends Component {
               Welcome to your page to keep track of your goals and healthy habits!
         </p>
             <Router>
+
               <p className="Nav-links">
 
                 <a> <Link to="/home">Home</Link> </a>
-                <a> | </a>< a> <Link to="/about">About</Link> </a>
-                <a> | </a> <a> <Link to="/rate-your-day">How was your day?</Link> </a>
+          
+                <a> | </a> <a> <Link to="/rate-your-day">About / Rate Your Day! </Link> </a>
 
 
                 <Route exact path="/" component={Home} />
                 <Route exact path="/home" component={Home} />
-                <Route exact path="/about" component={About} />
+               
                 <Route exact path="/rate-your-day" component={Day} />
 
               </p>

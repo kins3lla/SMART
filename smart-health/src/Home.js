@@ -171,13 +171,19 @@ class Home extends Component {
       <div className="List">
           <h3> Recommendations</h3>
           <ul>
-          <button class="Eat"> Eat </button>
+          <li> Eat </li>
           <li> Go for a walk~ </li>
           <li> Meditate </li>
           <li> Deep breathing exercises </li>
-          <li> Go for a walk~ </li>
           <li> Drink Water+ </li>
           <li> Social activity </li>
+          <li> Exercise </li>
+          <li> Journal </li>
+          <li> Try Something New</li>
+          <li> Spend time outside </li>
+          <li> Eat a balanced meal </li>
+          <li> Read </li>
+          
           </ul>
           
         </div>
